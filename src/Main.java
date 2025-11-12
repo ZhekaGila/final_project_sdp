@@ -1,15 +1,21 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import product.*;
+import product.components.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        IProductBuilder builder = new ComputerBuilder();
+
+        // Устанавливаем компоненты
+        Computer pc = builder.setCPU(new CPU("Intel Core i7-13700K", 170000, 8, 32))
+            .setRAM(new RAM("Kingston Fury 32GB DDR5", 45000, 16))
+            .setGPU(new GPU("NVIDIA RTX 4070", 350000, 8))
+            .setStorage(new Storage("Samsung 990 Pro 1TB SSD", 65000, "SSD", 512))
+            .getComputer();
+
+        // Выводим результат
+        System.out.println(pc);
+
+
     }
 }
