@@ -1,7 +1,7 @@
 package builder.product.concrete;
 
 import builder.product.Product;
-import builder.product.IProductBuilder;
+import builder.product.core.IProductBuilder;
 import builder.product.components.*;
 
 public class ComputerBuilder implements IProductBuilder {
