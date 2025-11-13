@@ -1,6 +1,13 @@
 import builder.product.*;
 import builder.product.components.*;
 import builder.product.concrete.ComputerBuilder;
+import builder.product.core.IProductBuilder;
+import factory.concrete.PayPalPayment;
+import factory.core.IPayment;
+import factory.core.PaymentCreator;
+import factory.creators.PayPalCreator;
+import model.User;
+import model.Wallet;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +21,13 @@ public class Main {
             .getComputer();
 
         System.out.println(pc);
+
+        User user1=new User("Aizada", new Wallet(500000f));
+
+        PaymentCreator creator=new PayPalCreator();
+        IPayment payment = creator.createPayment();
+        payment.processPayment(user1,pc.getPrice());
+
 
 
     }

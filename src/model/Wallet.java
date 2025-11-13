@@ -9,6 +9,9 @@ public class Wallet {
         this.balance = balance;
     }
 
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
     public float getBalance() {
         return balance;
     }
