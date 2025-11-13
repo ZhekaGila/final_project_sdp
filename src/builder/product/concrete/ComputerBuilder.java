@@ -1,6 +1,6 @@
 package builder.product.concrete;
 
-import builder.product.Computer;
+import builder.product.Product;
 import builder.product.IProductBuilder;
 import builder.product.components.*;
 
@@ -35,7 +35,7 @@ public class ComputerBuilder implements IProductBuilder {
     }
 
     @Override
-    public Computer getComputer() {
-        return new Computer(this.cpu, this.ram, this.gpu, this.storage);
+    public Product getComputer() {
+        return new Product(this.cpu, this.ram, this.gpu, this.storage);
     }
 }
