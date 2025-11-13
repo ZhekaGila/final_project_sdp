@@ -7,5 +7,5 @@ public interface  IProductBuilder {
     IProductBuilder setRAM(Component ram);
     IProductBuilder setStorage(Component storage);
     IProductBuilder setGPU(Component gpu);
-    Computer getComputer();
+    Product getComputer();
 }

@@ -2,14 +2,14 @@ package builder.product;
 
 import builder.product.components.*;
 
-public class Computer {
+public class Product {
     private Component cpu;
     private Component ram;
     private Component gpu;
     private Component storage;
     private float price;
 
-    public Computer(Component cpu, Component ram, Component gpu, Component storage) {
+    public Product(Component cpu, Component ram, Component gpu, Component storage) {
         this.cpu = cpu;
         this.ram = ram;
         this.gpu = gpu;
