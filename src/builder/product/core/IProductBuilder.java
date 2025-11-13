@@ -1,5 +1,6 @@
-package builder.product;
+package builder.product.core;
 
+import builder.product.Product;
 import builder.product.components.*;
 
 public interface  IProductBuilder {
