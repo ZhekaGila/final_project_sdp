@@ -1,8 +1,8 @@
-package product;
+package builder.product;
 
-import product.components.*;
+import builder.product.components.*;
 
-public interface IProductBuilder {
+public interface  IProductBuilder {
     IProductBuilder setCPU(Component cpu);
     IProductBuilder setRAM(Component ram);
     IProductBuilder setStorage(Component storage);

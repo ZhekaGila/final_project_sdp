@@ -1,5 +1,6 @@
-import product.*;
-import product.components.*;
+import builder.product.*;
+import builder.product.components.*;
+import builder.product.concrete.ComputerBuilder;
 
 public class Main {
     public static void main(String[] args) {

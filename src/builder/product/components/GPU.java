@@ -1,4 +1,4 @@
-package product.components;
+package builder.product.components;
 
 public class GPU extends Component {
     private int vram;

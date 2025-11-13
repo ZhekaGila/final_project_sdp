@@ -1,6 +1,8 @@
-package product;
+package builder.product.concrete;
 
-import product.components.*;
+import builder.product.Computer;
+import builder.product.IProductBuilder;
+import builder.product.components.*;
 
 public class ComputerBuilder implements IProductBuilder {
     private Component cpu;

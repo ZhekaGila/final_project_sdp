@@ -1,4 +1,4 @@
-package product.components;
+package builder.product.components;
 
 public abstract class Component{
     protected String model; // модель компонента

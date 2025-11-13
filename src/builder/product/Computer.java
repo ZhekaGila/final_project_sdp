@@ -1,6 +1,6 @@
-package product;
+package builder.product;
 
-import product.components.*;
+import builder.product.components.*;
 
 public class Computer {
     private Component cpu;

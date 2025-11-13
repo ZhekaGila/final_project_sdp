@@ -1,4 +1,4 @@
-package product.components;
+package builder.product.components;
 
 public class CPU extends Component {
     private int core;
