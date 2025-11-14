@@ -3,7 +3,7 @@ package factory.client;
 import factory.core.PaymentCreator;
 import factory.creators.CardPaymentCreator;
 import factory.creators.PayPalPaymentCreator;
-import model.WalletType;
+import model.wallet.WalletType;
 
 public class PaymentFactory {
 

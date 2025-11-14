@@ -1,7 +1,7 @@
 package observer.observers;
 
 import model.User;
-import model.Wallet;
+import model.wallet.Wallet;
 import observer.core.IWalletObserver;
 
 public class WalletUserObserver implements IWalletObserver{

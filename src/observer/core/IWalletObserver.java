@@ -1,6 +1,6 @@
 package observer.core;
 
-import model.Wallet;
+import model.wallet.Wallet;
 
 public interface IWalletObserver {
     void update(Wallet wallet);
