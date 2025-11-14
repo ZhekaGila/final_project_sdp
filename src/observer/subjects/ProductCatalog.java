@@ -3,17 +3,13 @@ package observer.subjects;
 import builder.product.Product;
 import observer.core.IProductObserver;
 import observer.core.IProductSubject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservableProduct implements IProductSubject {
-    private Product product;
-    private List<IProductObserver> observers = new ArrayList();
+public class ProductCatalog implements IProductSubject {
 
-
-    public ObservableProduct(Product product) {
-        this.product = product;
-    }
+    private final List<IProductObserver> observers = new ArrayList<>();
 
     @Override
     public void addObserver(IProductObserver observer) {
@@ -25,8 +21,12 @@ public class ObservableProduct implements IProductSubject {
         observers.remove(observer);
     }
 
+    public void addNewProduct(Product newProduct) {
+        notifyObservers(newProduct);
+    }
+
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Product product) {
         for (IProductObserver observer : observers) {
             observer.update(product);
         }

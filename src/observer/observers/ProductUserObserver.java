@@ -13,7 +13,7 @@ public class ProductUserObserver implements IProductObserver {
     }
 
     private String getUpdateMessage(Product product) {
-        return "Some Text";
+        return "[User " + user.getName() + "] New product added: " + product.toString();
     }
 
     @Override

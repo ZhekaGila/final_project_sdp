@@ -9,6 +9,8 @@ import facade.CheckoutFacade;
 import model.User;
 import model.wallet.Wallet;
 import model.wallet.WalletType;
+import observer.observers.ProductUserObserver;
+import observer.subjects.ProductCatalog;
 import strategy.concrete.*;
 
 public class Main {
@@ -33,18 +35,23 @@ public class Main {
         System.out.println(pc1);
         System.out.println(pc2);
 
+        User richUser = new User("Бэби Джин Богач бравл старс Мастер Туда Сюда Миллионер", new Wallet(15000000f, WalletType.CARD));
+        User bitchUser = new User("Алихан", new Wallet(500000f, WalletType.CARD));
 
-        User user1 = new User("Aizada", new Wallet(500000f, WalletType.PAYPAL));
+        ProductCatalog catalog = new ProductCatalog();
+        catalog.addObserver(new ProductUserObserver(richUser));
+        catalog.addObserver(new ProductUserObserver(bitchUser));
+
+        catalog.addNewProduct(pc1);
 
 
-        Cart cart = new Cart();
-        cart.addProduct(pc1);
-        cart.addProduct(pc2);
+        richUser.getCart().addProduct(pc1);
+        richUser.getCart().addProduct(pc2);
 
-        System.out.println("\nAdded product to cart. Total now: " + cart.getTotal());
+        System.out.println("\n" + richUser + "Added product to cart. Total now: " + richUser.getCart().getTotal());
 
 
-        CheckoutFacade checkoutFacade = new CheckoutFacade(user1, cart, new NoIDiscountStrategy());
+        CheckoutFacade checkoutFacade = new CheckoutFacade(richUser, richUser.getCart(), new NoIDiscountStrategy());
 
         checkoutFacade.setDiscountStrategy(new PercentageIDiscountStrategy(0.1f));
         checkoutFacade.checkout();
