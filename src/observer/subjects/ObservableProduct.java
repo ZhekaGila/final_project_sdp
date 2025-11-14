@@ -10,6 +10,7 @@ public class ObservableProduct implements IProductSubject {
     private Product product;
     private List<IProductObserver> observers = new ArrayList();
 
+
     public ObservableProduct(Product product) {
         this.product = product;
     }
@@ -30,4 +31,6 @@ public class ObservableProduct implements IProductSubject {
             observer.update(product);
         }
     }
+
+
 }

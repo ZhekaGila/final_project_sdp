@@ -9,6 +9,7 @@ import facade.CheckoutFacade;
 import model.User;
 import model.wallet.Wallet;
 import model.wallet.WalletType;
+import strategy.concrete.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,8 +44,10 @@ public class Main {
         System.out.println("\nAdded product to cart. Total now: " + cart.getTotal());
 
 
-        CheckoutFacade checkoutFacade = new CheckoutFacade(user1, cart);
+        CheckoutFacade checkoutFacade = new CheckoutFacade(user1, cart, new NoIDiscountStrategy());
 
+        checkoutFacade.setDiscountStrategy(new PercentageIDiscountStrategy(0.1f));
         checkoutFacade.checkout();
+
     }
 }
