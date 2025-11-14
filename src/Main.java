@@ -2,12 +2,13 @@ import builder.product.*;
 import builder.product.components.*;
 import builder.product.concrete.ComputerBuilder;
 import builder.product.core.IProductBuilder;
-import factory.concrete.PayPalPayment;
 import factory.core.IPayment;
 import factory.core.PaymentCreator;
-import factory.creators.PayPalCreator;
+import factory.creators.PayPalPaymentCreator;
+import factory.client.PaymentFactory;
 import model.User;
 import model.Wallet;
+import model.WalletType;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,13 +23,15 @@ public class Main {
 
         System.out.println(pc);
 
-        User user1=new User("Aizada", new Wallet(500000f));
+        User user1 = new User("Aizada", new Wallet(500000f, WalletType.PAYPAL));
 
-        PaymentCreator creator=new PayPalCreator();
+        WalletType userPaymentType = user1.getWallet().getType();
+
+        PaymentCreator creator = PaymentFactory.getCreator(userPaymentType);
+
         IPayment payment = creator.createPayment();
-        payment.processPayment(user1,pc.getPrice());
 
-
+        payment.processPayment(user1, pc.getPrice());
 
     }
 }

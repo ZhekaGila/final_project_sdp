@@ -4,7 +4,7 @@ import factory.core.IPayment;
 import factory.core.PaymentCreator;
 import factory.concrete.PayPalPayment;
 
-public class PayPalCreator extends PaymentCreator {
+public class PayPalPaymentCreator extends PaymentCreator {
 
     @Override
     public IPayment createPayment() {
