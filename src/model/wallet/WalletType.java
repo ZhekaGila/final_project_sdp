@@ -1,4 +1,4 @@
-package model;
+package model.wallet;
 
 public enum WalletType {
     CARD,

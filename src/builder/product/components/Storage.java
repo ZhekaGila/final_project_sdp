@@ -6,7 +6,7 @@ public class Storage extends Component {
 
     private String descriptionText = "Storage Type: " + type + " (" + size + " GB)";
 
-    public Storage(String model, float price, String type, int size) {
+    public Storage(String model,String type, int size, float price) {
         super(model, price);
         this.type = type;
         this.size = size;

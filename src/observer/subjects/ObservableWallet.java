@@ -1,6 +1,6 @@
 package observer.subjects;
 
-import model.Wallet;
+import model.wallet.Wallet;
 import observer.core.IWalletObserver;
 import observer.core.IWalletSubject;
 

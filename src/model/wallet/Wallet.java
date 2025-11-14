@@ -1,4 +1,4 @@
-package model;
+package model.wallet;
 
 public class Wallet {
     private float balance;
