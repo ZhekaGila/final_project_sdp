@@ -4,6 +4,8 @@ public class CPU extends Component {
     private int core;
     private int bit_system;
 
+    private String descriptionText = "CPU Model: " + model + "(" + core + " cores)";
+
     public CPU(String model, float price, int core, int bit_system) {
         super(model, price);
         this.core = core;
@@ -12,6 +14,6 @@ public class CPU extends Component {
 
     @Override
     public String getDescription() {
-        return "CPU Model: " + model + "(" + core + " cores)";
+        return descriptionText;
     }
 }

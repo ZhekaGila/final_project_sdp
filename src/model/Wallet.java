@@ -16,7 +16,6 @@ public class Wallet {
         return balance;
     }
 
-
     public String getDescription() {
         return descriptionMessage;
     }
