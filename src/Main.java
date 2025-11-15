@@ -48,7 +48,7 @@ public class Main {
         richUser.getCart().addProduct(pc1);
         richUser.getCart().addProduct(pc2);
 
-        System.out.println("\n" + richUser + "Added product to cart. Total now: " + richUser.getCart().getTotal());
+        System.out.println("\n" + richUser.getName() + "Added product to cart. Total now: " + richUser.getCart().getTotal());
 
 
         CheckoutFacade checkoutFacade = new CheckoutFacade(richUser, richUser.getCart(), new NoIDiscountStrategy());

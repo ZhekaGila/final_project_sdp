@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ProductCatalog implements IProductSubject {
 
+    private final List<Product> products = new ArrayList<>(); // список всех продуктов
     private final List<IProductObserver> observers = new ArrayList<>();
 
     @Override
@@ -22,6 +23,7 @@ public class ProductCatalog implements IProductSubject {
     }
 
     public void addNewProduct(Product newProduct) {
+        products.add(newProduct);
         notifyObservers(newProduct);
     }
 
@@ -30,6 +32,10 @@ public class ProductCatalog implements IProductSubject {
         for (IProductObserver observer : observers) {
             observer.update(product);
         }
+    }
+
+    public List<Product> getProducts() {
+        return new ArrayList<>(products); // возвращаем копию, чтобы не нарушать инкапсуляцию
     }
 
 
