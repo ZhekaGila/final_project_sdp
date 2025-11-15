@@ -4,9 +4,9 @@ public class Storage extends Component {
     private String type;
     private int size;
 
-    private String descriptionText = "Storage Type: " + type + " (" + size + " GB)";
+    private static final String descriptionTemplate = "Storage: %s (%d GB)";
 
-    public Storage(String model,String type, int size, float price) {
+    public Storage(String model, String type, int size, float price) {
         super(model, price);
         this.type = type;
         this.size = size;
@@ -14,6 +14,18 @@ public class Storage extends Component {
 
     @Override
     public String getDescription() {
-        return descriptionText;
+        return String.format(descriptionTemplate, type, size);
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
