@@ -1,8 +1,8 @@
 package builder.product.components;
 
 public abstract class Component{
-    protected String model; // модель компонента
-    protected float price;    // цена компонента в условных единицах
+    protected String model;
+    protected float price;
 
     public Component(String model, float price) {
         this.model = model;
