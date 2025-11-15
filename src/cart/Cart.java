@@ -20,6 +20,13 @@ public class Cart {
         return items;
     }
 
+    public boolean findProduct(Product product) {
+        if (items.contains(product)) {
+            return true;
+        }
+        return false;
+    }
+
     public float getTotal() {
         float total = 0;
         for (Product computer : items) {

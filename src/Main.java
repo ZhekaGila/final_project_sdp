@@ -3,7 +3,6 @@ import builder.product.components.*;
 import builder.product.concrete.ComputerBuilder;
 import builder.product.core.IProductBuilder;
 
-import cart.Cart;
 import facade.CheckoutFacade;
 
 import model.User;
@@ -32,7 +31,7 @@ public class Main {
         // Строим продукты
         IProductBuilder builder = new ComputerBuilder();
 
-        Product pc1 = builder
+        Product pc1 = builder.setName("Computer 1")
                 .setCPU(new CPU("Intel Core i7-13700K", 8, 32, 170000))
                 .setRAM(new RAM("Kingston Fury 32GB DDR5", 45000, 16))
                 .setGPU(new GPU("NVIDIA RTX 4070", 350000, 8))

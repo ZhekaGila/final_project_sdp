@@ -5,10 +5,17 @@ import builder.product.core.IProductBuilder;
 import builder.product.components.*;
 
 public class ComputerBuilder implements IProductBuilder {
+    private String name;
     private Component cpu;
     private Component ram;
     private Component gpu;
     private Component storage;
+
+    @Override
+    public ComputerBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     @Override
     public ComputerBuilder setCPU(Component cpu) {
@@ -36,6 +43,6 @@ public class ComputerBuilder implements IProductBuilder {
 
     @Override
     public Product getComputer() {
-        return new Product(this.cpu, this.ram, this.gpu, this.storage);
+        return new Product(this.name, this.cpu, this.ram, this.gpu, this.storage);
     }
 }

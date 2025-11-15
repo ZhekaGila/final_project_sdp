@@ -8,10 +8,10 @@ import model.wallet.Wallet;
 import strategy.core.IDiscountStrategy;
 
 public class CheckoutFacade {
-
     private final User user;
     private final Cart cart;
     private IDiscountStrategy discountStrategy;
+    private IDiscountStrategy IDiscountStrategy;
 
     private String successMessage = "Order completed!";
     private String failureMessage = "Order is not completed!";
@@ -26,6 +26,9 @@ public class CheckoutFacade {
 
     public boolean isPromocodeApplied() {
         return promocodeApplied;
+    public CheckoutFacade(User user, IDiscountStrategy IDiscountStrategy) {
+        this.user = user;
+        this.IDiscountStrategy = IDiscountStrategy;
     }
 
     public void applyDiscountStrategy(IDiscountStrategy strategy) {
@@ -44,9 +47,19 @@ public class CheckoutFacade {
     public void checkout() {
 
         Wallet wallet = user.getWallet();
+        Cart cart = user.getCart();
+
+        float originalTotal = cart.getTotal();
+        float total = originalTotal;
 
         float total = calculateFinalPrice();
         System.out.println("Total price: " + total);
+        if (IDiscountStrategy != null) {
+            total = IDiscountStrategy.applyDiscount(originalTotal);
+            System.out.println(IDiscountStrategy.getDescription(originalTotal));
+        }
+
+        System.out.println("Final price: " + total);
 
         PaymentCreator creator = PaymentFactory.getCreator(wallet.getType());
 
