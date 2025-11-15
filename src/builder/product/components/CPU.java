@@ -2,18 +2,30 @@ package builder.product.components;
 
 public class CPU extends Component {
     private int core;
-    private int bit_system;
+    private int bitSystem;
 
-    private String descriptionText = "CPU Model: " + model + "(" + core + " cores)";
+    private static final String descriptionTemplate = "CPU: %s (%d cores, %d-bit)";
 
-    public CPU(String model, int core, int bit_system, float price) {
+    public CPU(String model, int core, int bitSystem, float price) {
         super(model, price);
         this.core = core;
-        this.bit_system = bit_system;
+        this.bitSystem = bitSystem;
     }
 
     @Override
     public String getDescription() {
-        return descriptionText;
+        return String.format(descriptionTemplate, model, core, bitSystem);
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getCore() {
+        return core;
+    }
+
+    public int getBitSystem() {
+        return bitSystem;
     }
 }
