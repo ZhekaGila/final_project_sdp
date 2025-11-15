@@ -93,15 +93,34 @@ public class Main {
                     System.out.print("Enter promocode: ");
                     String code = scanner.next();
 
+                    if (checkout.isPromocodeApplied()) {
+                        System.out.println("You can use only one promocode per session.");
+                        break; // выходим из case, не применяем скидку повторно
+                    }
+
                     Promocode promocode = promocodeStorage.find(code);
 
                     if (promocode == null) {
                         System.out.println("Promocode not found.");
-                    } else {
-                        checkout.setDiscountStrategy(new PromocodeStrategy(promocode));
-                        System.out.println("Promocode applied: " + promocode.getCode());
+                    }else if (promocode.isUsed()) {
+                        System.out.println("Promocode already used in this session.");
+                    }
+                    else {
+                        // применяем стратегию
+                        checkout.applyDiscountStrategy(new PromocodeStrategy(promocode));
+
+                        // выводим информацию о скидке
+                        float oldPrice = cart.getTotal();
+                        float newPrice = checkout.calculateFinalPrice();
+                        float saved = oldPrice - newPrice;
+                        float percent = (saved / oldPrice) * 100;
+
+                        System.out.printf("✔ Promocode applied: %s | Price: %.2f → %.2f (saved %.2f, %.0f%%)\n",
+                                promocode.getCode(), oldPrice, newPrice, saved, percent);
                     }
                 }
+
+
                 case 5 -> checkout.checkout();
                 case 6 -> {
                     running = false;
