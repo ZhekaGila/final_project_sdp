@@ -3,6 +3,7 @@ import builder.product.components.*;
 import builder.product.concrete.ComputerBuilder;
 import builder.product.core.IProductBuilder;
 
+import cart.Cart;
 import facade.CheckoutFacade;
 
 import model.User;
