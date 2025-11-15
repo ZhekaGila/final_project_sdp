@@ -3,13 +3,15 @@ package builder.product;
 import builder.product.components.*;
 
 public class Product {
+    private String name;
     private Component cpu;
     private Component ram;
     private Component gpu;
     private Component storage;
     private float price;
 
-    public Product(Component cpu, Component ram, Component gpu, Component storage) {
+    public Product(String name, Component cpu, Component ram, Component gpu, Component storage) {
+        this.name = name;
         this.cpu = cpu;
         this.ram = ram;
         this.gpu = gpu;
@@ -23,6 +25,7 @@ public class Product {
 //    public void setGPU(Component gpu) {this.gpu = gpu;}
 //    public void setStorage(Component storage) {this.storage = storage;}
 
+    public String getName() {return name;}
     public Component getCPU(){
         return cpu;
     }
