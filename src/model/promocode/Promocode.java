@@ -3,8 +3,10 @@ package model.promocode;
 public class Promocode {
 
     private final String code;
-    private final PromocodeType type;
+    private final PromocodeType type; // FIXED или PERCENTAGE
     private final float value;
+
+    private boolean used = false;
 
     public Promocode(String code, PromocodeType type, float value) {
         this.code = code;
@@ -22,5 +24,13 @@ public class Promocode {
 
     public float getValue() {
         return value;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void markUsed() {
+        this.used = true;
     }
 }
