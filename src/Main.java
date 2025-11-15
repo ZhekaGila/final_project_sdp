@@ -103,7 +103,10 @@ public class Main {
 
                     if (promocode == null) {
                         System.out.println("Promocode not found.");
-                    } else {
+                    }else if (promocode.isUsed()) {
+                        System.out.println("Promocode already used in this session.");
+                    }
+                    else {
                         // применяем стратегию
                         checkout.applyDiscountStrategy(new PromocodeStrategy(promocode));
 
