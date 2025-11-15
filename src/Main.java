@@ -7,15 +7,29 @@ import cart.Cart;
 import facade.CheckoutFacade;
 
 import model.User;
+import model.promocode.*;
 import model.wallet.Wallet;
 import model.wallet.WalletType;
 import observer.observers.ProductUserObserver;
 import observer.subjects.ProductCatalog;
 import strategy.concrete.*;
+import strategy.core.IDiscountStrategy;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
+        // Создаём пользователя
+        User currentUser = new User("Alice", new Wallet(1000000, WalletType.CARD));
+
+        // Создаём каталог и добавляем наблюдателя
+        ProductCatalog catalog = new ProductCatalog();
+        catalog.addObserver(new ProductUserObserver(currentUser));
+
+        // Строим продукты
         IProductBuilder builder = new ComputerBuilder();
 
         Product pc1 = builder
@@ -26,35 +40,78 @@ public class Main {
                 .getComputer();
 
         Product pc2 = builder
-                .setCPU(new CPU("Intel Core i3-50042", 100000, 4, 16))
+                .setCPU(new CPU("Intel Core i3-50042", 4, 16, 100000))
                 .setRAM(new RAM("Kingston Gay 32GB DDR5", 16, 75000))
                 .setGPU(new GPU("NVIDIA GTX 2040", 8, 200000))
                 .setStorage(new Storage("Xiaomi 50 500 GB HDD", "HDD", 512, 52000))
                 .getComputer();
 
-        System.out.println(pc1);
-        System.out.println(pc2);
-
-        User richUser = new User("Бэби Джин Богач бравл старс Мастер Туда Сюда Миллионер", new Wallet(15000000f, WalletType.CARD));
-        User bitchUser = new User("Алихан", new Wallet(500000f, WalletType.CARD));
-
-        ProductCatalog catalog = new ProductCatalog();
-        catalog.addObserver(new ProductUserObserver(richUser));
-        catalog.addObserver(new ProductUserObserver(bitchUser));
-
+        // Добавляем продукты в каталог
         catalog.addNewProduct(pc1);
+        catalog.addNewProduct(pc2);
 
+        Cart cart = currentUser.getCart();
+        IDiscountStrategy discountStrategy = new NoIDiscountStrategy();
+        CheckoutFacade checkout = new CheckoutFacade(currentUser, cart, discountStrategy);
 
-        richUser.getCart().addProduct(pc1);
-        richUser.getCart().addProduct(pc2);
+        PromocodeStorage promocodeStorage = new PromocodeStorage();
 
-        System.out.println("\n" + richUser + "Added product to cart. Total now: " + richUser.getCart().getTotal());
+        boolean running = true;
 
+        while (running) {
+            System.out.println("\n--- Computer Shop Menu ---");
+            System.out.println("1. Show catalog");
+            System.out.println("2. Add product to cart");
+            System.out.println("3. View cart");
+            System.out.println("4. Apply promocode");
+            System.out.println("5. Checkout");
+            System.out.println("6. Exit");
+            System.out.print("> ");
 
-        CheckoutFacade checkoutFacade = new CheckoutFacade(richUser, richUser.getCart(), new NoIDiscountStrategy());
+            int choice = scanner.nextInt();
 
-        checkoutFacade.setDiscountStrategy(new PercentageIDiscountStrategy(0.1f));
-        checkoutFacade.checkout();
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("Catalog:");
+                    System.out.println("1. " + pc1);
+                    System.out.println("2. " + pc2);
+                }
+                case 2 -> {
+                    System.out.println("Which product to add? (1 or 2)");
+                    int prodChoice = scanner.nextInt();
+                    if (prodChoice == 1) cart.addProduct(pc1);
+                    else if (prodChoice == 2) cart.addProduct(pc2);
+                    System.out.println("Product added!");
+                }
+                case 3 -> {
+                    System.out.println("Your cart:");
+                    for (Product p : cart.getItems()) {
+                        System.out.println(p);
+                    }
+                    System.out.println("Total: " + cart.getTotal());
+                }
+                case 4 -> {
+                    System.out.print("Enter promocode: ");
+                    String code = scanner.next();
 
+                    Promocode promocode = promocodeStorage.find(code);
+
+                    if (promocode == null) {
+                        System.out.println("Promocode not found.");
+                    } else {
+                        checkout.setDiscountStrategy(new PromocodeStrategy(promocode));
+                        System.out.println("Promocode applied: " + promocode.getCode());
+                    }
+                }
+                case 5 -> checkout.checkout();
+                case 6 -> {
+                    running = false;
+                    System.out.println("Bye!");
+                }
+                default -> System.out.println("Invalid option!");
+            }
+        }
+
+        scanner.close();
     }
 }
