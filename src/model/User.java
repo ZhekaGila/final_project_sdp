@@ -1,13 +1,14 @@
 package model;
 
+import builder.product.Product;
 import cart.Cart;
 import model.wallet.Wallet;
+import cart.Catalog;
 
 public class User {
     private String name;
     private Wallet wallet;
     private Cart cart;
-
 
     public User(String name, Wallet wallet) {
         this.name = name;
@@ -25,4 +26,19 @@ public class User {
 
     public Cart getCart() {return cart;}
 
+    public boolean addToCart(Catalog catalog, Product product) {
+        if (catalog.getProducts().contains(product)) {
+            cart.addProduct(product);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeFromCart(Product product) {
+        if (cart.findProduct(product)) {
+            cart.removeProduct(product);
+            return true;
+        }
+        return false;
+    }
 }
