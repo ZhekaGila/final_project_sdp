@@ -1,4 +1,4 @@
-package adapter;
+package adapter.concreteadapter;
 
 import factory.core.IPayment;
 import factory.core.PaymentCreator;

@@ -1,5 +1,6 @@
-package adapter;
+package adapter.concreteadapter;
 
+import adapter.payment.KaspiBankService;
 import factory.core.IPayment;
 import model.User;
 
