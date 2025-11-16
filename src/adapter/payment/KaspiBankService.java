@@ -1,4 +1,4 @@
-package adapter;
+package adapter.payment;
 
 public class KaspiBankService {
 
