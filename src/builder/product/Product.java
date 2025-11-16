@@ -35,8 +35,10 @@ public class Product {
     public Component getStorage() {return storage;}
     public float getPrice() {return price;}
 
-    public String getDescription() {
-        return "DETAILS: \n" +
+    @Override
+    public String toString() {
+        return "\nDETAILS: \n" +
+                "Name: " + getName() + "\n" +
                 cpu.getDescription()+ "\n" +
                 ram.getDescription()+ "\n" +
                 gpu.getDescription()+ "\n" +

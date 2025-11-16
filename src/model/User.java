@@ -35,7 +35,7 @@ public class User {
     }
 
     public boolean removeFromCart(Product product) {
-        if (cart.findProduct(product)) {
+        if (cart.exists(product)) {
             cart.removeProduct(product);
             return true;
         }

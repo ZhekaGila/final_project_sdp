@@ -15,8 +15,8 @@ public class ProductUserObserver implements IProductObserver {
 
     public void getUpdateMessage(ProductEventType type, Product product) {
         switch (type) {
-            case ADDED -> System.out.println("[User " + user.getName() + "] New product added: " + product);
-            case REMOVED -> System.out.println("[User " + user.getName() + "] Product removed: " + product);
+            case ADDED -> System.out.println("[User " + user.getName() + "] New product added: " + product.getName());
+            case REMOVED -> System.out.println("[User " + user.getName() + "] Product removed: " + product.getName());
         }
     }
 

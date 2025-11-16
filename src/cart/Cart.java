@@ -20,11 +20,20 @@ public class Cart {
         return items;
     }
 
-    public boolean findProduct(Product product) {
+    public boolean exists(Product product) {
         if (items.contains(product)) {
             return true;
         }
         return false;
+    }
+
+    public Product findProduct(String productName){
+        for (Product product : items) {
+            if(product.getName().equals(productName)) {
+                return product;
+            }
+        }
+        return null;
     }
 
     public float getTotal() {

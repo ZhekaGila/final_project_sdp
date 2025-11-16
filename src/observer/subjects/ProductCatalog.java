@@ -34,15 +34,21 @@ public class ProductCatalog implements IProductSubject {
         notifyObservers(ProductEventType.ADDED, product);
     }
 
-    public boolean removeProduct(Product product) {
+    public void removeProduct(Product product) {
         if(products.contains(product)) {
             products.remove(product);
             notifyObservers(ProductEventType.REMOVED, product);
-            return true;
         }
-        return false;
     }
 
+    public Product findProduct(String productName) {
+        for (Product product : products) {
+            if(product.getName().equals(productName)) {
+                return product;
+            }
+        }
+        return null;
+    }
     public List<Product> getProducts() {
         return products;
     }

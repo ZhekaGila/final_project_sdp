@@ -1,25 +1,20 @@
 package facade;
 
+import builder.product.Product;
 import cart.Cart;
 import factory.client.PaymentFactory;
 import factory.core.PaymentCreator;
 import model.User;
 import model.wallet.Wallet;
+import strategy.concrete.NoIDiscountStrategy;
 import strategy.core.IDiscountStrategy;
 
 public class CheckoutFacade {
-    private final User user;
-    private final Cart cart;
     private IDiscountStrategy discountStrategy;
-
-    private String successMessage = "Order completed!";
-    private String failureMessage = "Order is not completed!";
     private boolean promocodeApplied = false;
 
 
-    public CheckoutFacade(User user, Cart cart, IDiscountStrategy discountStrategy) {
-        this.user = user;
-        this.cart = cart;
+    public CheckoutFacade(IDiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
     }
 
@@ -29,18 +24,23 @@ public class CheckoutFacade {
 
     public void applyDiscountStrategy(IDiscountStrategy strategy) {
         if (promocodeApplied) {
-            System.out.println("You can use only one promocode per session.");
+            System.out.println("You can use only one promocode.");
             return;
         }
         this.discountStrategy = strategy;
         promocodeApplied = true;
     }
 
-    public float calculateFinalPrice() {
-        return discountStrategy.applyDiscount(cart.getTotal());
+    public float calculateFinalPrice(User user) {
+        return discountStrategy.applyDiscount(user.getCart().getTotal());
     }
 
-    public void checkout() {
+    public void clearDiscount(){
+        this.discountStrategy = new NoIDiscountStrategy();
+        promocodeApplied = false;
+    }
+
+    public boolean checkout(User user) {
 
         Wallet wallet = user.getWallet();
         Cart cart = user.getCart();
@@ -58,13 +58,6 @@ public class CheckoutFacade {
 
         PaymentCreator creator = PaymentFactory.getCreator(wallet.getType());
 
-        boolean success = creator.createPayment().processPayment(user, total);
-
-        if (success) {
-            System.out.println(successMessage);
-            cart.clear();
-        } else {
-            System.out.println(failureMessage);
-        }
+        return creator.createPayment().processPayment(user, total);
     }
 }
