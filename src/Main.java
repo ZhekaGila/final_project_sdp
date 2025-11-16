@@ -47,8 +47,8 @@ public class Main {
                 .getComputer();
 
         // Добавляем продукты в каталог
-        catalog.addNewProduct(pc1);
-        catalog.addNewProduct(pc2);
+        catalog.addProduct(pc1);
+        catalog.addProduct(pc2);
 
         Cart cart = currentUser.getCart();
         IDiscountStrategy discountStrategy = new NoIDiscountStrategy();

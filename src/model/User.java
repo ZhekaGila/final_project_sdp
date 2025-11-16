@@ -3,7 +3,7 @@ package model;
 import builder.product.Product;
 import cart.Cart;
 import model.wallet.Wallet;
-import cart.Catalog;
+import observer.subjects.ProductCatalog;
 
 public class User {
     private String name;
@@ -26,7 +26,7 @@ public class User {
 
     public Cart getCart() {return cart;}
 
-    public boolean addToCart(Catalog catalog, Product product) {
+    public boolean addToCart(ProductCatalog catalog, Product product) {
         if (catalog.getProducts().contains(product)) {
             cart.addProduct(product);
             return true;
