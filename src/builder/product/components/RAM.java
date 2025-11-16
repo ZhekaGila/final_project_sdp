@@ -15,10 +15,6 @@ public class RAM extends Component {
         return String.format(descriptionTemplate, model, amount);
     }
 
-    public String getModel() {
-        return model;
-    }
-
     public int getAmount() {
         return amount;
     }

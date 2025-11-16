@@ -20,6 +20,7 @@ public class Product {
         this.price=cpu.getPrice()+ram.getPrice()+gpu.getPrice()+ storage.getPrice();
     }
 
+    public void setName(String name) {this.name = name;}
     public void setPrice(float price) {this.price = price;}
     public void setCPU(Component cpu) {this.cpu = cpu;}
     public void setRAM(Component ram) {this.ram = ram;}

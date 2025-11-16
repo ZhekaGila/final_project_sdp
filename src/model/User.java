@@ -17,21 +17,9 @@ public class User {
         this.cart = new Cart();
     }
 
-    public boolean addToCart(ProductCatalog catalog, Product product) {
-        if (catalog.getProducts().contains(product)) {
-            cart.addProduct(product);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean removeFromCart(Product product) {
-        if (cart.exists(product)) {
-            cart.removeProduct(product);
-            return true;
-        }
-        return false;
-    }
+    public void setName(String name) {this.name = name;}
+    public void setCart(Cart cart) {this.cart = cart;}
+    public void setWallet(Wallet wallet) {this.wallet = wallet;}
 
     public Wallet getWallet() {
         return wallet;

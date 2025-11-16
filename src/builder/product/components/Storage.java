@@ -17,10 +17,6 @@ public class Storage extends Component {
         return String.format(descriptionTemplate, type, size);
     }
 
-    public String getModel() {
-        return model;
-    }
-
     public String getType() {
         return type;
     }

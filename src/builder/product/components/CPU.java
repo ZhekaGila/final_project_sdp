@@ -18,10 +18,6 @@ public class CPU extends Component {
         return String.format(descriptionTemplate, model, core, bitSystem);
     }
 
-    public String getModel() {
-        return model;
-    }
-
     public int getCore() {
         return core;
     }

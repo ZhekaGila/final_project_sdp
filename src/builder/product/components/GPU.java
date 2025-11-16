@@ -15,10 +15,6 @@ public class GPU extends Component {
         return String.format(descriptionTemplate, model, vram);
     }
 
-    public String getModel() {
-        return model;
-    }
-
     public int getVram() {
         return vram;
     }

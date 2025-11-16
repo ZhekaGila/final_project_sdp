@@ -43,7 +43,10 @@ public class ShopServiceApp {
             case 6 -> System.out.println("Your balance: " + user.getWallet().getBalance()); //view balance
             case 7 -> depositBalance(scanner);
             case 8 -> checkoutCart(scanner);
-            case 9 -> running = false; //exit
+            case 9 -> {
+                System.out.println("Good Bye!!!");
+                running = false; //exit
+            }
             default -> System.out.println("Invalid option!");
         }
 
@@ -103,6 +106,7 @@ public class ShopServiceApp {
             float saved = oldPrice - newPrice;
             float percent = (saved / oldPrice) * 100;
 
+            promocode.markUsed();
             System.out.printf("Promocode applied: %s | Price: %.2f → %.2f (saved %.2f, %.0f%%)\n",
                     promocode.getCode(), oldPrice, newPrice, saved, percent);
         }
