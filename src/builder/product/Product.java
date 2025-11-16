@@ -1,5 +1,6 @@
 package builder.product;
 
+import builder.IProduct;
 import builder.product.components.*;
 
 public class Product {
@@ -34,8 +35,7 @@ public class Product {
     public Component getStorage() {return storage;}
     public float getPrice() {return price;}
 
-    @Override
-    public String toString(){
+    public String getDescription() {
         return "DETAILS: \n" +
                 cpu.getDescription()+ "\n" +
                 ram.getDescription()+ "\n" +

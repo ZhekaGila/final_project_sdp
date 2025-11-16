@@ -10,14 +10,14 @@ public class CardPayment implements IPayment {
 
     @Override
     public boolean processPayment(User user, float price) {
-        float balance = user.getWallet().getBalance();
-        if (balance < price) {
+        boolean result = user.getWallet().withdraw(price);
+
+        if (!result) {
             System.out.println(paymentErrorMessage);
             return false;
-        } else{
-            user.getWallet().setBalance(balance - price);
-            System.out.println(paymentSuccessMessage);
-            return true;
         }
+
+        System.out.println(paymentSuccessMessage);
+        return true;
     }
 }
