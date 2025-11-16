@@ -1,4 +1,4 @@
-package facade;
+package facade.checkout;
 
 import cart.Cart;
 import factory.client.PaymentFactory;
