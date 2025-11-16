@@ -3,7 +3,7 @@ import builder.product.concrete.ComputerBuilder;
 import builder.product.core.IProductBuilder;
 
 import cart.Cart;
-import facade.CheckoutFacade;
+import facade.checkout.CheckoutFacade;
 
 import facade.service.app.ShopServiceApp;
 import model.User;
