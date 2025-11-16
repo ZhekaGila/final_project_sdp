@@ -11,52 +11,55 @@ import strategy.core.IDiscountStrategy;
 public class CheckoutFacade {
 
     private IDiscountStrategy discountStrategy;
-    private boolean promocodeApplied = false;
+
+    public CheckoutFacade() {
+        this.discountStrategy = new NoIDiscountStrategy();
+    }
 
     public CheckoutFacade(IDiscountStrategy discountStrategy) {
-        this.discountStrategy = discountStrategy;
+        this.discountStrategy = discountStrategy != null
+                ? discountStrategy
+                : new NoIDiscountStrategy();
     }
 
     public boolean isPromocodeApplied() {
-        return promocodeApplied;
+        return !(discountStrategy instanceof NoIDiscountStrategy);
     }
 
     public void applyDiscountStrategy(IDiscountStrategy strategy) {
-        if (promocodeApplied) {
-            System.out.println("You can use only one promocode.");
-            return;
+        if (isPromocodeApplied()) {
+            throw new IllegalStateException("Only one promocode can be applied.");
         }
         this.discountStrategy = strategy;
-        promocodeApplied = true;
+    }
+
+    public void clearDiscount() {
+        this.discountStrategy = new NoIDiscountStrategy();
     }
 
     public float calculateFinalPrice(User user) {
-        return discountStrategy.applyDiscount(user.getCart().getTotal());
-    }
-
-    public void clearDiscount(){
-        this.discountStrategy = new NoIDiscountStrategy();
-        promocodeApplied = false;
+        float original = user.getCart().getTotal();
+        return discountStrategy.applyDiscount(original);
     }
 
     public boolean checkout(User user) {
 
-        Wallet wallet = user.getWallet();
         Cart cart = user.getCart();
+        Wallet wallet = user.getWallet();
 
-        float originalTotal = cart.getTotal();
-        float total = originalTotal;
+        float original = cart.getTotal();
+        float finalPrice = calculateFinalPrice(user);
 
-        System.out.println("Total price: " + total);
-        if (discountStrategy != null) {
-            total = discountStrategy.applyDiscount(originalTotal);
-            System.out.println(discountStrategy.getDescription(originalTotal));
-        }
-
-        System.out.println("Final price: " + total);
+        logPricingInfo(original, finalPrice);
 
         PaymentCreator creator = PaymentFactory.getCreator(wallet.getType());
 
-        return creator.createPayment().processPayment(user, total);
+        return creator.createPayment().processPayment(user, finalPrice);
+    }
+
+    private void logPricingInfo(float original, float finalPrice) {
+        System.out.println("Total price: " + original);
+        System.out.println(discountStrategy.getDescription(original));
+        System.out.println("Final price: " + finalPrice);
     }
 }
