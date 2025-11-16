@@ -1,6 +1,5 @@
 package observer.core;
 
-
 import builder.product.Product;
 import observer.events.ProductEventType;
 

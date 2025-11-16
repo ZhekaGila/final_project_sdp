@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Cart {
 
-    private final List<Product> items = new ArrayList<>();
+    private List<Product> items = new ArrayList<>();
 
     public void addProduct(Product product) {
         items.add(product);
@@ -14,10 +14,6 @@ public class Cart {
 
     public void removeProduct(Product product) {
         items.remove(product);
-    }
-
-    public List<Product> getItems() {
-        return items;
     }
 
     public boolean exists(Product product) {
@@ -50,5 +46,12 @@ public class Cart {
 
     public void clear() {
         items.clear();
+    }
+
+    public void setItems(List<Product> items) {
+        this.items = items;
+    }
+    public List<Product> getItems() {
+        return items;
     }
 }

@@ -1,6 +1,5 @@
 package facade;
 
-import builder.product.Product;
 import cart.Cart;
 import factory.client.PaymentFactory;
 import factory.core.PaymentCreator;
@@ -10,9 +9,9 @@ import strategy.concrete.NoIDiscountStrategy;
 import strategy.core.IDiscountStrategy;
 
 public class CheckoutFacade {
+
     private IDiscountStrategy discountStrategy;
     private boolean promocodeApplied = false;
-
 
     public CheckoutFacade(IDiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;

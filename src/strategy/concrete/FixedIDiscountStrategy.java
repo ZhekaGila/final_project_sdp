@@ -21,7 +21,6 @@ public class FixedIDiscountStrategy implements IDiscountStrategy {
     public String getDescription(float originalTotal) {
         float newPrice = applyDiscount(originalTotal);
         float saved = originalTotal - newPrice;
-
         return String.format(descriptionMessageTemplate, discount, saved);
     }
 }

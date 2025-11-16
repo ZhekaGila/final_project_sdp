@@ -5,6 +5,7 @@ import builder.product.core.IProductBuilder;
 import builder.product.components.*;
 
 public class ComputerBuilder implements IProductBuilder {
+
     private String name;
     private Component cpu;
     private Component ram;
