@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCatalog implements IProductSubject {
+
     private List<Product> products = new ArrayList<Product>();
     private final List<IProductObserver> observers = new ArrayList<>();
 

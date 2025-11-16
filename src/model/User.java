@@ -6,6 +6,7 @@ import model.wallet.Wallet;
 import observer.subjects.ProductCatalog;
 
 public class User {
+
     private String name;
     private Wallet wallet;
     private Cart cart;
@@ -15,16 +16,6 @@ public class User {
         this.wallet = wallet;
         this.cart = new Cart();
     }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Cart getCart() {return cart;}
 
     public boolean addToCart(ProductCatalog catalog, Product product) {
         if (catalog.getProducts().contains(product)) {
@@ -40,5 +31,17 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 }

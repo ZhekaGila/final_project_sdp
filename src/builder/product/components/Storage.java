@@ -1,9 +1,9 @@
 package builder.product.components;
 
 public class Storage extends Component {
+
     private String type;
     private int size;
-
     private static final String descriptionTemplate = "Storage: %s (%d GB)";
 
     public Storage(String model, String type, int size, float price) {

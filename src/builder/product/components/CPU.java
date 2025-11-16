@@ -1,6 +1,7 @@
 package builder.product.components;
 
 public class CPU extends Component {
+
     private int core;
     private int bitSystem;
 

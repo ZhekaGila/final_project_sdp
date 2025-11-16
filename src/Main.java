@@ -66,14 +66,16 @@ public class Main {
                 .getComputer();
 
 
-        //просим ввести имя, баланс и тип карты
+        // Ask for name
         System.out.println("Enter your name please\n>");
         String name =scanner.nextLine();
 
+        // Ask for type of payment
         System.out.println("Choose type of wallet: \n1.Card \n2.Paypal \n3.Kaspi\n>");
         int walletType = scanner.nextInt();
         scanner.nextLine();
 
+        // Ask for balance
         System.out.println("Enter your balance:\n>");
         int balance = scanner.nextInt();
         scanner.nextLine();
@@ -86,10 +88,10 @@ public class Main {
             default -> System.out.println("Invalid wallet type");
         }
 
-        // Создаём пользователя
+        // Creating user
         User user = new User(name, wallet);
 
-        // Создаём каталог и добавляем наблюдателя
+        // Creating a catalog and adding a observer
         ProductCatalog catalog = new ProductCatalog();
         System.out.println("Would you want to get notification about new products?[y/n]\n>");
         String answer = scanner.nextLine();
@@ -98,14 +100,14 @@ public class Main {
             catalog.addObserver(new ProductUserObserver(user));
         }
 
-        //добавляем и уведомляется
+        // Adding products and notify users
         catalog.addProduct(officePC);
         catalog.addProduct(midGaming);
         catalog.addProduct(highEnd);
         catalog.addProduct(workstation);
         catalog.addProduct(miniPC);
 
-
+        // Creating cart and discounts with checkout
         Cart cart = user.getCart();
         IDiscountStrategy discountStrategy = new NoIDiscountStrategy();
         PromocodeStorage promocodeStorage = new PromocodeStorage();
@@ -130,10 +132,10 @@ public class Main {
             try {
                 choice = scanner.nextInt();
             } catch (InputMismatchException e) {
-                choice = 10;        //или любое значение по умолчанию
+                choice = 10;
             }
 
-            scanner.nextLine(); //очищаем
+            scanner.nextLine(); // Cleaning
 
             switch (choice) {
                 case 1 -> {
@@ -182,10 +184,10 @@ public class Main {
                         System.out.println("Promocode already used in this session.");
                     }
                     else {
-                        //применяем стратегию
+                        // Using strategy
                         checkout.applyDiscountStrategy(new PromocodeStrategy(promocode));
 
-                        //выводим информацию о скидке
+                        // Output the information about discount
                         float oldPrice = cart.getTotal();
                         float newPrice = checkout.calculateFinalPrice(user);
                         float saved = oldPrice - newPrice;
@@ -214,7 +216,7 @@ public class Main {
                     }
 
                 }
-                case 8 ->{
+                case 8 -> {
                     System.out.println("Would you want to purchase products in your cart? [y/n]");
                     if (scanner.nextLine().equals("y")) {
                         boolean success = checkout.checkout(user);

@@ -1,6 +1,7 @@
 package model.wallet;
 
 public class Wallet {
+
     private float balance;
     private WalletType type;
     private String descriptionMessageTemplate = "Wallet Type: %s | Balance: %.2f";

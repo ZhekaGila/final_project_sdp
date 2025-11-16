@@ -1,6 +1,7 @@
 package builder.product.components;
 
 public abstract class Component{
+
     protected String model;
     protected float price;
 

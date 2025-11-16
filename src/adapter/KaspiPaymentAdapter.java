@@ -2,11 +2,10 @@ package adapter;
 
 import factory.core.IPayment;
 import model.User;
-import model.wallet.Wallet;
 
 public class KaspiPaymentAdapter implements IPayment {
 
-    private final KaspiBankService kaspiService;
+    private KaspiBankService kaspiService;
 
     public KaspiPaymentAdapter() {
         this.kaspiService = new KaspiBankService();
@@ -22,5 +21,13 @@ public class KaspiPaymentAdapter implements IPayment {
         }
 
         return kaspiService.sendPayment(balance, amount);
+    }
+
+    public KaspiBankService getKaspiService() {
+        return kaspiService;
+    }
+
+    public void setKaspiService(KaspiBankService kaspiService) {
+        this.kaspiService = kaspiService;
     }
 }

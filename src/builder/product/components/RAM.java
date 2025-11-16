@@ -1,8 +1,8 @@
 package builder.product.components;
 
 public class RAM extends Component {
-    private int amount;
 
+    private int amount;
     private static final String descriptionTemplate = "RAM: %s (%d GB)";
 
     public RAM(String model, int amount, int price) {
